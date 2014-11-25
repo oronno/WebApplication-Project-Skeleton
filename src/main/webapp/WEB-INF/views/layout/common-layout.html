@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title layout:title-pattern="$CONTENT_TITLE - $DECORATOR_TITLE">Project Skeleton Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="icon" href="../../../resources/images/favicon.ico" th:href="@{/resources/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../../resources/bootstrap-3.3.0/css/bootstrap.css"
+          th:href="@{/resources/bootstrap-3.3.0/css/bootstrap.min.css}"/>
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Styles for this template -->
+    <link rel="stylesheet" type="text/css" media="all" href="../../../resources/css/dashboard.css"
+          th:href="@{/resources/css/dashboard.css}"/>
+    <!-- Custom CSS Style -->
+    <link rel="stylesheet" type="text/css" media="all" href="../../../resources/css/custom-style.css"
+          th:href="@{/resources/css/custom-style.css}"/>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Oneous.com</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" th:href="@{/home}">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#" th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row row-offcanvas row-offcanvas-left">
+
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+            <ul class="nav nav-sidebar">
+                <li th:classappend="${page == 'home' ? 'active' : ''}">
+                    <a href="../home.html" th:href="@{/home}">Overview</a>
+                </li>
+                <li th:classappend="${page == 'navitem1' ? 'active' : ''}">
+                    <a href="#">Nav Item 1</a>
+                </li>
+            </ul>
+            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
+                <li th:classappend="${page == 'users' ? 'active' : ''}">
+                    <a href="#" th:href="@{/admin/users}">User List</a>
+                </li>
+            </ul>
+
+        </div>
+        <!--/span-->
+
+        <div class="col-sm-9 col-md-10 main">
+
+            <!--toggle sidebar button-->
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i
+                        class="glyphicon glyphicon-chevron-left"></i></button>
+            </p>
+
+            <div layout:fragment="content">
+                <p>Page content goes here</p>
+            </div>
+
+        </div>
+        <!--/row-->
+    </div>
+</div>
+<!--/.container-->
+
+<div class="footer">
+    <div class="container">
+        <p class="text-muted">&copy; www.oneous.com</p>
+    </div>
+</div>
+
+<!-- script references -->
+<script src="../../../resources/libs/jquery-1.11.1.js"
+        th:src="@{/resources/libs/jquery-1.11.1.min.js}"></script>
+<script src="../../../resources/bootstrap-3.3.0/js/bootstrap.js"
+        th:src="@{/resources/bootstrap-3.3.0/js/bootstrap.min.js}"></script>
+<script src="../../../resources/js/custom-scripts.js"
+        th:src="@{/resources/js/custom-scripts.js}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="../../resources/libs/ie10-viewport-bug-workaround.js"
+        th:src="@{/resources/libs/ie10-viewport-bug-workaround.js}"></script>
+
+<div layout:fragment="custom-scripts">
+    <!--Custom page specific scripts goes here-->
+</div>
+
+</body>
+</html>

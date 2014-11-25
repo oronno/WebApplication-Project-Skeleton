@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+
+<head>
+    <title>User List</title>
+</head>
+
+<body th:with="page='users'">
+
+<div layout:fragment="content">
+    <a href="#" th:href="@{/admin/users/create}" class="btn btn-primary btn-lg active" role="button">Create New User</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Serial</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user, userStat : ${userList}">
+                <td th:text="${userStat.count}">1</td>
+                <td th:text="${user.username}">Admin</td>
+                <td th:text="${user.email}">admin@oneous.com</td>
+                <td th:text="${#strings.listJoin(user.roles, ', ')}">User,Admin</td>
+                <td th:text="${user.created}">25/10/2014</td>
+                <td th:text="${user.updated}">25/10/2014</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

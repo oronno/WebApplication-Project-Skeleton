@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.oneous.webapp.security"/>
+
+    <security:http pattern="/resources/**" security="none"/>
+
+    <security:http auto-config="true" use-expressions="true">
+
+        <security:form-login authentication-failure-handler-ref="authenticationFailureHandler"
+                             authentication-success-handler-ref="authenticationSuccessHandler"
+                             login-page="/login" login-processing-url="/login-check"/>
+
+        <security:logout logout-url="/logout"
+                         logout-success-url="/login?logout=true"
+                         delete-cookies="JSESSIONID"/>
+
+        <security:access-denied-handler error-page="/access-denied"/>
+
+        <security:intercept-url pattern="/login" access="permitAll"/>
+
+        <security:intercept-url pattern="/logout" access="isAuthenticated()"/>
+
+        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+    </security:http>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="databaseAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <bean id="databaseAuthenticationProvider" class="com.oneous.webapp.security.DatabaseAuthenticationProvider"/>
+
+    <bean class="org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder"
+          id="messageDigestPasswordEncoder">
+        <constructor-arg value="sha-256"/>
+    </bean>
+
+    <bean id="authenticationSuccessHandler" class="com.oneous.webapp.security.SecurityAuthenticationSuccessHandler"/>
+    <bean id="authenticationFailureHandler" class="com.oneous.webapp.security.SecurityAuthenticationFailureHandler"/>
+
+</beans>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="../../resources/images/favicon.ico" th:href="@{/resources/images/favicon.ico}"/>
+
+    <title>Signin Template for Webapp</title>
+
+    <!-- Bootstrap core CSS/JS -->
+    <link href="../../resources/bootstrap-3.3.0/css/bootstrap.css"
+          th:href="@{/resources/bootstrap-3.3.0/css/bootstrap.min.css}" rel="stylesheet"/>
+
+
+    <!-- Custom styles for this template -->
+    <link href="../../resources/css/signin-layout.css" th:href="@{/resources/css/signin-layout.css}" rel="stylesheet"/>
+
+    <!--Caution: Include jquery before bootstrap js :D -->
+    <script type="text/javascript" src="../../resources/libs/jquery-1.11.1.js"
+            th:src="@{/resources/libs/jquery-1.11.1.min.js}"></script>
+    <script type="text/javascript" src="../../resources/bootstrap-3.3.0/js/bootstrap.js"
+            th:src="@{/resources/bootstrap-3.3.0/js/bootstrap.min.js}"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:if="${param.containsKey('error')}" th:switch="${param.error[0]}"
+         class="alert alert-warning alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <span th:case="usernameEmpty">Username can't be empty</span>
+        <span th:case="badCredential">Incorrect username or password.</span>
+        <span th:case="userLocked">Your account has been locked. Contact your admin.</span>
+        <span th:case="unknown">Error! Try again.</span>
+    </div>
+
+    <form class="form-signin" role="form" th:action="@{/login-check}" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" name="j_username" class="form-control" placeholder="username"/>
+        <input type="password" name="j_password" class="form-control" placeholder="Password"/>
+
+        <!--<div class="checkbox">-->
+        <!--<label>-->
+        <!--<input type="checkbox" value="remember-me"> Remember me-->
+        <!--</label>-->
+        <!--</div>-->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+</div>
+<!-- /container -->
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="../../resources/libs/ie10-viewport-bug-workaround.js"
+        th:src="@{/resources/libs/ie10-viewport-bug-workaround.js}"></script>
+</body>
+</html>
