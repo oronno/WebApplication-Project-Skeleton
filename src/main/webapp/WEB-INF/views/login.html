@@ -42,10 +42,10 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <span th:case="usernameEmpty">Username can't be empty</span>
-        <span th:case="badCredential">Incorrect username or password.</span>
-        <span th:case="userLocked">Your account has been locked. Contact your admin.</span>
-        <span th:case="unknown">Error! Try again.</span>
+        <span th:case="usernameEmpty" th:text="#{error.username.cant.empty}">Username can't be empty</span>
+        <span th:case="badCredential" th:text="#{error.incorrect.credential}">Incorrect username or password</span>
+        <span th:case="userLocked" th:text="#{error.account.locked}">Your account has been locked. Contact your admin.</span>
+        <span th:case="unknown" th:text="#{error.try.again}">Error! Try again.</span>
     </div>
 
     <form class="form-signin" role="form" th:action="@{/login-check}" method="post">

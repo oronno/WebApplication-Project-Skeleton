@@ -20,9 +20,9 @@ configurations and library setup if you gonna use following technology stack:
 
 Following things has been configured:
 
-* Spring Security standard User and Role based security system
-* Transaction support in service/dao layer
-* Database connection pooling with enterprise-ready c3p0
+* Spring Security's standard User and Role based authentication system
+* Transaction support in Service/Dao layer
+* Database connection pooling with enterprise-ready c3p0 library
 * Bean Validation to validate model objects
 * Internationalization(i18n) with MessageSource
 * Templating framework (like Apache Tiles) to work with thymeleaf (Thymeleaf Layout Dialect)
@@ -57,9 +57,9 @@ Change corresponding user credential to access database in `persistence-mysql.pr
 when hibernate.hbm2ddl.auto property is set to create-drop in applicationContext-jpa.xml.
 
 
-## Quick development -> direct deploy app on embedded tomcat
+## Quick development -> Direct deploy app on embedded tomcat
 Well, building project and deploying manually in app container sometimes become pain as these are repetitive work. To make 
-your life easier, here embedded tomcat container has been integrated. Just type `gradle tomcatRunWar` in your command line 
+your life easier, here embedded tomcat container has been integrated. Just type `gradle tomcatRunWar` from your command line
 and your project will build and run automatically on a tomcat container within a minute. You just have to go **http://localhost:8080/** from 
 your browser to see it running. Cool...right? ;)
 
@@ -69,4 +69,4 @@ your browser to see it running. Cool...right? ;)
 3. Make sure, you installed jrebel at `/usr/local/JRebel` directory
 4. Run **gradle deployWar** in your source code which will copy the war file to tomcat's webapps folder
 5. From tomcat7/bin, start tomcat server by `./catalina-jrebel.sh run`
-6. Access application by browsing: [localhost:8080/javafest/](localhost:8080/javafest/)
+6. Access application by browsing: [http://localhost:8080/webapp/](http://localhost:8080/webapp/)
